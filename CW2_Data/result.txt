@@ -1,7 +1,13 @@
-Length of Ground Truth:  20
-Length of Predictions:   20
-Accuracy: 0.25
+
 
 Length of Ground Truth:  20
 Length of Predictions:   20
 Accuracy: 0.3
+Running time 5.87 minutes
+
+
+
+Length of Ground Truth:  20
+Length of Predictions:   20
+Accuracy: 0.35
+Running time: 6.67 minutes

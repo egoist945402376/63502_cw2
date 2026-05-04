@@ -3,7 +3,7 @@
 "CTRL_DBP_MUS_german_musician_NOISE2","0","http://dbpedia.org/ontology/Person"
 "CTRL_DBP_MUS_rock_bands_labels","2","http://dbpedia.org/ontology/Company"
 "CTRL_DBP_MUS_rock_bands_labels","3","http://dbpedia.org/ontology/Person"
-"CTRL_DBP_MUS_rock_bands_labels_NOISE2","2","http://dbpedia.org/ontology/Agent"
+"CTRL_DBP_MUS_rock_bands_labels_NOISE2","2","http://dbpedia.org/ontology/Company"
 "CTRL_DBP_POL_european_prime_ministers","0","http://dbpedia.org/ontology/Person"
 "CTRL_DBP_SPO_goalkeepers","2","http://dbpedia.org/ontology/Agent"
 "CTRL_DBP_SPO_goalkeepers","3","http://dbpedia.org/ontology/ArchitecturalStructure"

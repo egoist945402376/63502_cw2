@@ -10,6 +10,7 @@ Step 4  Class_Selection : pick the most frequent class across all sampled entiti
 """
 
 import csv
+import os
 import random
 import time
 from collections import Counter
@@ -17,12 +18,14 @@ from collections import Counter
 import requests
 
 # ── Configuration ──────────────────────────────────────────────────────────
+_DIR = os.path.dirname(os.path.abspath(__file__))
+
 LOOKUP_URL   = "https://lookup.dbpedia.org/api/search"
 SPARQL_URL   = "https://dbpedia.org/sparql"
 DBO_PREFIX   = "http://dbpedia.org/ontology/"
-TABLES_DIR   = "tables"
-TARGETS_FILE = "Targets.csv"
-RESULTS_FILE = "results_alg1.csv"
+TABLES_DIR   = os.path.join(_DIR, "tables")
+TARGETS_FILE = os.path.join(_DIR, "Targets.csv")
+RESULTS_FILE = os.path.join(_DIR, "results_alg1.csv")
 K            = 5          # number of cells sampled per column
 SLEEP_SEC    = 0.4        # polite delay between API calls
 
@@ -118,6 +121,8 @@ def annotate_column(table_name: str, col_id: int) -> str:
 # ── Main ───────────────────────────────────────────────────────────────────
 
 def main():
+    start_time = time.time()
+
     # Read target columns
     targets = []
     with open(TARGETS_FILE) as f:
@@ -140,7 +145,9 @@ def main():
         for tbl, col, cls in results:
             writer.writerow([tbl, str(col), cls])
 
+    elapsed = (time.time() - start_time) / 60
     print(f"\nDone. Results saved to {RESULTS_FILE}")
+    print(f"Running time: {elapsed:.2f} minutes")
 
 
 if __name__ == "__main__":
