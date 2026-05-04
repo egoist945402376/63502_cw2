@@ -1,0 +1,20 @@
+PREFIX dbo:  <http://dbpedia.org/ontology/>
+PREFIX dbp:  <http://dbpedia.org/property/>
+PREFIX dbr:  <http://dbpedia.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geo:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT DISTINCT ?city ?cityName ?population ?area ?lat ?long
+WHERE {
+  ?city a dbo:City ;
+        dbo:country ?country ;
+        rdfs:label ?cityName .
+  FILTER (?country IN (dbr:United_Kingdom, dbr:England, dbr:Scotland,
+                       dbr:Wales, dbr:Northern_Ireland))
+  FILTER (LANG(?cityName) = "en")
+  OPTIONAL { ?city dbo:populationTotal ?population }
+  OPTIONAL { ?city dbo:areaTotal       ?area }
+  OPTIONAL { ?city geo:lat             ?lat }
+  OPTIONAL { ?city geo:long            ?long }
+}
+ORDER BY ?cityName
