@@ -1,0 +1,7 @@
+Length of Ground Truth:  20
+Length of Predictions:   20
+Accuracy: 0.25
+
+Length of Ground Truth:  20
+Length of Predictions:   20
+Accuracy: 0.3

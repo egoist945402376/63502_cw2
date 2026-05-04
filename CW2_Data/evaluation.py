@@ -1,6 +1,8 @@
+import os
 import pandas as pd
 
 DBO_PREFIX = "http://dbpedia.org/ontology/"
+_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def normalize_label(x: str) -> str:
     """Return a clean DBpedia ontology URI or 'NONE'."""
@@ -9,12 +11,12 @@ def normalize_label(x: str) -> str:
 
 def checker():
     # ---- Load GT (3rd column) as a list of strings
-    gt_df = pd.read_csv("GT.csv", header=None)
+    gt_df = pd.read_csv(os.path.join(_DIR, "GT.csv"), header=None)
     y_true = gt_df[2].astype(str).str.strip().str.strip('"').str.strip("'").tolist()
     y_true = [normalize_label(x) for x in y_true]
 
     # ---- Load predictions (one per line)
-    pred_df = pd.read_csv("results_alg1_run2.csv", header=None)
+    pred_df = pd.read_csv(os.path.join(_DIR, "results_alg1.csv"), header=None)
     y_pred = pred_df[2].astype(str).str.strip().str.strip('"').str.strip("'").tolist()
     y_pred = [normalize_label(x) for x in y_pred]
 
