@@ -1,0 +1,12 @@
+PREFIX dbo:  <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?country ?countryName
+WHERE {
+  ?country a dbo:Country ;
+           rdfs:label ?countryName ;
+           dbo:capital ?capital .
+  FILTER NOT EXISTS { ?country dbo:dissolutionYear ?year }
+  FILTER (LANG(?countryName) = "en")
+}
+ORDER BY ?countryName

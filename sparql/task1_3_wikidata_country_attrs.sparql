@@ -1,0 +1,24 @@
+PREFIX wd:   <http://www.wikidata.org/entity/>
+PREFIX wdt:  <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?country ?countryName ?isoCode ?callingCode ?area ?population
+       (GROUP_CONCAT(DISTINCT ?provinceName; SEPARATOR="; ") AS ?provinces)
+WHERE {
+  ?country wdt:P31 wd:Q3624078 ;
+           wdt:P36 ?capital ;
+           rdfs:label ?countryName .
+  FILTER NOT EXISTS { ?country wdt:P576 ?dissolved }
+  FILTER (LANG(?countryName) = "en")
+  OPTIONAL { ?country wdt:P297  ?isoCode }
+  OPTIONAL { ?country wdt:P474  ?callingCode }
+  OPTIONAL { ?country wdt:P2046 ?area }
+  OPTIONAL { ?country wdt:P1082 ?population }
+  OPTIONAL {
+    ?country wdt:P150 ?province .
+    ?province rdfs:label ?provinceName .
+    FILTER (LANG(?provinceName) = "en")
+  }
+}
+GROUP BY ?country ?countryName ?isoCode ?callingCode ?area ?population
+ORDER BY ?countryName

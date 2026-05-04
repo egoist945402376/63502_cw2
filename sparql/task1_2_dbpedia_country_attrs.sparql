@@ -1,0 +1,17 @@
+PREFIX dbo:  <http://dbpedia.org/ontology/>
+PREFIX dbp:  <http://dbpedia.org/property/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?country ?countryName ?isoCode ?callingCode ?area ?population
+WHERE {
+  ?country a dbo:Country ;
+           rdfs:label ?countryName ;
+           dbo:capital ?capital .
+  FILTER NOT EXISTS { ?country dbo:dissolutionYear ?year }
+  FILTER (LANG(?countryName) = "en")
+  OPTIONAL { ?country dbo:iso31661Code       ?isoCode }
+  OPTIONAL { ?country dbp:callingCode        ?callingCode }
+  OPTIONAL { ?country dbp:areaKm             ?area }
+  OPTIONAL { ?country dbp:populationEstimate ?population }
+}
+ORDER BY ?countryName
